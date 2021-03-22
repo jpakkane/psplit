@@ -19,6 +19,8 @@ same way as Python's string splitting works.
 
 - This should really be implemented via coroutines
 
+- parameter for whitespace stripping
+
 - return types should be either `std::string_view`s for performance or
   `std::string`s if a copy of the input data is needed
 
