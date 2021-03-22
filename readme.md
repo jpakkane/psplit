@@ -15,17 +15,17 @@ same way as Python's string splitting works.
   much any data store without the need to copy data or write
   converters
 
-- return types can be either `std::string_view`s for performance or
-  `std::string`s if you need a copy of the input data
-
 ## Missing features
 
 - This should really be implemented via coroutines
+
+- return types should be either `std::string_view`s for performance or
+  `std::string`s if a copy of the input data is needed
 
 - Split by substring
 
 - Split by group of chars (e.g. whitespace)
 
-- Not hardened against bad input
+- Not hardened against file system shenanigans
 
 - API is neither complete nor stable, do not depend on it being stable
