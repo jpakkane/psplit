@@ -21,7 +21,7 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include "psplit.hpp"
+#include <psplit.hpp>
 #include <iostream>
 
 int validate(const std::vector<std::string> &a1, const std::vector<std::string> &a2) {
