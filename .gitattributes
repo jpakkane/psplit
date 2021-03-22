@@ -1,0 +1,4 @@
+*.sln      -text diff
+*.vcxproj  -text diff
+*.user     -text diff
+input*txt  -text diff
