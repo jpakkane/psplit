@@ -1,0 +1,9 @@
+*~
+/build
+.project
+.cproject
+.settings
+.pydevproject
+.idea
+.vscode
+
