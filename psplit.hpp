@@ -150,17 +150,17 @@ private:
 #endif
 
 inline void
-add_piece(std::vector<std::string> &words, std::string_view substr, const Empties e) noexcept {
+add_piece(std::vector<std::string_view> &words, std::string_view substr, const Empties e) noexcept {
     if(e == Empties::Drop && substr.empty()) {
         return;
     }
-    words.push_back(std::string(substr));
+    words.push_back(substr);
 }
 
-inline std::vector<std::string> split_copy(std::string_view input,
+inline std::vector<std::string_view> split(std::string_view input,
                                            std::string_view split_chrs,
                                            const Empties e = Empties::Drop) noexcept {
-    std::vector<std::string> words;
+    std::vector<std::string_view> words;
     std::string_view::size_type current = 0;
     if(input.empty()) {
         add_piece(words, input.substr(0, 0), e);
@@ -191,6 +191,18 @@ inline std::vector<std::string> split_copy(std::string_view input,
         add_piece(words, input.substr(input_size, 0), e);
     }
     return words;
+}
+
+inline std::vector<std::string> split_copy(std::string_view input,
+                                           std::string_view split_chrs,
+                                           const Empties e = Empties::Drop) noexcept {
+    auto views =  split(input, split_chrs, e);
+    std::vector<std::string> copies;
+    copies.reserve(views.size());
+    for(const auto &v: views) {
+        copies.emplace_back(v);
+    }
+    return copies;
 }
 
 inline std::vector<std::string> split_copy(std::string_view input,
