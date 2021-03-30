@@ -100,13 +100,13 @@ class MmapFile final {
 public:
     explicit MmapFile(const std::filesystem::path &fname) {
         // FIXME, handle failures
-        fd = open(fname.c_str(), O_RDONLY|O_CLOEXEC);
+        fd = open(fname.c_str(), O_RDONLY | O_CLOEXEC);
         map_size = lseek(fd, 0, SEEK_END);
         map = mmap(nullptr, map_size, PROT_READ, MAP_PRIVATE, fd, 0);
     }
 
     std::string_view view() const noexcept {
-        return std::string_view(static_cast<char*>(map), map_size);
+        return std::string_view(static_cast<char *>(map), map_size);
     }
 
     ~MmapFile() { unmap(); }
@@ -172,7 +172,7 @@ inline std::vector<std::string_view> split(std::string_view input,
             if(current == 0) {
                 add_piece(words, input.substr(current, 0), e);
             } else {
-                if(split_chrs.find(input[current-1]) != std::string_view::npos) {
+                if(split_chrs.find(input[current - 1]) != std::string_view::npos) {
                     add_piece(words, input.substr(current, 0), e);
                 }
             }
@@ -196,10 +196,10 @@ inline std::vector<std::string_view> split(std::string_view input,
 inline std::vector<std::string> split_copy(std::string_view input,
                                            std::string_view split_chrs,
                                            const Empties e = Empties::Drop) noexcept {
-    auto views =  split(input, split_chrs, e);
+    auto views = split(input, split_chrs, e);
     std::vector<std::string> copies;
     copies.reserve(views.size());
-    for(const auto &v: views) {
+    for(const auto &v : views) {
         copies.emplace_back(v);
     }
     return copies;
