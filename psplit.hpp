@@ -158,7 +158,7 @@ add_piece(std::vector<std::string> &words, std::string_view substr, const Emptie
 }
 
 inline std::vector<std::string> split_copy(std::string_view input,
-                                           const char split_chr = '\n',
+                                           std::string_view split_chrs,
                                            const Empties e = Empties::Drop) noexcept {
     std::vector<std::string> words;
     std::string_view::size_type current = 0;
@@ -168,17 +168,17 @@ inline std::vector<std::string> split_copy(std::string_view input,
     }
     const auto input_size = input.size();
     while(current != std::string_view::npos && current != input_size) {
-        if(input[current] == split_chr) {
+        if(split_chrs.find(input[current]) != std::string_view::npos) {
             if(current == 0) {
                 add_piece(words, input.substr(current, 0), e);
             } else {
-                if(input[current - 1] == split_chr) {
+                if(split_chrs.find(input[current-1]) != std::string_view::npos) {
                     add_piece(words, input.substr(current, 0), e);
                 }
             }
             ++current;
         } else {
-            auto end = input.find(split_chr, current);
+            auto end = input.find_first_of(split_chrs, current);
             if(end == std::string_view::npos) {
                 add_piece(words, input.substr(current, end), e);
             } else {
@@ -187,10 +187,23 @@ inline std::vector<std::string> split_copy(std::string_view input,
             current = end;
         }
     }
-    if(input.back() == split_chr) {
+    if(split_chrs.find(input.back()) != std::string_view::npos) {
         add_piece(words, input.substr(input_size, 0), e);
     }
     return words;
+}
+
+inline std::vector<std::string> split_copy(std::string_view input,
+                                           char split_chr = '\n',
+                                           const Empties e = Empties::Drop) noexcept {
+    char buf[2] = {split_chr, '\0'};
+    return split_copy(input, buf, e);
+}
+
+inline std::vector<std::string> split_whitespace(std::string_view input,
+                                                 const Empties e = Empties::Drop) noexcept {
+    const char *whitespaces = " \n\r\t";
+    return split_copy(input, whitespaces, e);
 }
 
 inline std::vector<std::string_view> split_lines(std::string_view data) noexcept {

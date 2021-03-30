@@ -171,6 +171,19 @@ int test_file2() {
     return validate(result, truth_preserve);
 }
 
+int test_whitespace() {
+    std::string source(" hello\tthere\n everyone\r");
+    const std::vector<std::string> truth_preserve{{""}, {"hello"}, {"there"}, {""}, {"everyone"}, {""}};
+    const std::vector<std::string> truth_drop{{"hello"}, {"there"}, {"everyone"}};
+
+    auto result = psplit::split_whitespace(source, psplit::Empties::Preserve);
+    if(validate(result, truth_preserve) != 0) {
+        return 1;
+    }
+    result = psplit::split_whitespace(source);
+    return validate(result, truth_drop);
+}
+
 int main() {
     std::cout << "Test 1\n";
     if(test1() != 0) {
@@ -228,5 +241,10 @@ int main() {
     if(test_file2() != 0) {
         return 1;
     }
-    return 0;
+
+    std::cout << "Test whitespace\n";
+    if(test_whitespace() != 0) {
+        return 1;
+    }
+return 0;
 }
