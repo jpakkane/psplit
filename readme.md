@@ -7,7 +7,11 @@ same way as Python's string splitting works.
 
 - splits by character
 
+- split by group of chars (e.g. whitespace)
+
 - smart line splitting
+
+- whitespace splitter helper function
 
 - helper code to process files that uses `mmap` transparently
 
@@ -19,14 +23,10 @@ same way as Python's string splitting works.
 
 - This should really be implemented via coroutines
 
-- parameter for whitespace stripping
-
 - return types should be either `std::string_view`s for performance or
   `std::string`s if a copy of the input data is needed
 
 - Split by substring
-
-- Split by group of chars (e.g. whitespace)
 
 - Not hardened against file system shenanigans
 
