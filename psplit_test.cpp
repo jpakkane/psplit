@@ -234,6 +234,15 @@ int test_substr1() {
     return check_substring_splits(input, substr, truth_preserve, truth_drop);
 }
 
+int test_substr2() {
+    std::string input("dingDONGdingDONG");
+    std::string substr("DONG");
+    const std::vector<std::string> truth_preserve{{"ding"}, {"ding"}, {""}};
+    const std::vector<std::string> truth_drop{{"ding"}, {"ding"}};
+
+    return check_substring_splits(input, substr, truth_preserve, truth_drop);
+}
+
 int main() {
     std::cout << "Test 1\n";
     if(test1() != 0) {
@@ -304,6 +313,11 @@ int main() {
 
     std::cout << "Test substr\n";
     if(test_substr1() != 0) {
+        return 1;
+    }
+
+    std::cout << "Test substr2\n";
+    if(test_substr2() != 0) {
         return 1;
     }
     return 0;

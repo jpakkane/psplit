@@ -212,8 +212,11 @@ inline std::vector<std::string_view> split_substr(std::string_view input,
         add_piece(words, cur_word, e);
         if(loc == std::string_view::npos) {
             input = input.substr(0, 0);
+        } else if(loc + split_sub.length() == input.length()) {
+            input = input.substr(0, 0);
+            add_piece(words, input, e);
         } else {
-            input = input.substr(loc + 1, std::string_view::npos);
+            input = input.substr(loc + split_sub.length(), std::string_view::npos);
         }
     }
     return words;
