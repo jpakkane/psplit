@@ -27,6 +27,15 @@
 int validate(const std::vector<std::string> &a1, const std::vector<std::string> &a2) {
     if(a1.size() != a2.size()) {
         std::cout << "Array size mismatch: " << a1.size() << " vs " << a2.size() << ".\n";
+        std::cout << "A1: ";
+        for(const auto &s : a1) {
+            std::cout << s << " ";
+        }
+        std::cout << "\nA2: ";
+        for(const auto &s : a2) {
+            std::cout << s << " ";
+        }
+        std::cout << "\n";
         return 1;
     }
     for(size_t i = 0; i < a1.size(); ++i) {
@@ -43,6 +52,21 @@ int check_splits(const std::string &input,
                  const std::vector<std::string> &truth_drop) {
     auto preserved = psplit::split_copy(input, '\n', psplit::Empties::Preserve);
     auto dropped = psplit::split_copy(input, '\n', psplit::Empties::Drop);
+
+    std::cout << "  preserving empties\n";
+    if(validate(preserved, truth_preserved) != 0) {
+        return 1;
+    }
+    std::cout << "  dropping empties.\n";
+    return validate(dropped, truth_drop);
+}
+
+int check_substring_splits(const std::string &input,
+                           std::string_view substr,
+                           const std::vector<std::string> &truth_preserved,
+                           const std::vector<std::string> &truth_drop) {
+    auto preserved = psplit::split_substr_copy(input, substr, psplit::Empties::Preserve);
+    auto dropped = psplit::split_substr_copy(input, substr, psplit::Empties::Drop);
 
     std::cout << "  preserving empties\n";
     if(validate(preserved, truth_preserved) != 0) {
@@ -201,6 +225,15 @@ int test_whitespace() {
     return validate(result, truth_drop);
 }
 
+int test_substr1() {
+    std::string input("abbcba");
+    std::string substr("b");
+    const std::vector<std::string> truth_preserve{{"a"}, {""}, {"c"}, {"a"}};
+    const std::vector<std::string> truth_drop{{"a"}, {"c"}, {"a"}};
+
+    return check_substring_splits(input, substr, truth_preserve, truth_drop);
+}
+
 int main() {
     std::cout << "Test 1\n";
     if(test1() != 0) {
@@ -266,6 +299,11 @@ int main() {
 
     std::cout << "Test whitespace\n";
     if(test_whitespace() != 0) {
+        return 1;
+    }
+
+    std::cout << "Test substr\n";
+    if(test_substr1() != 0) {
         return 1;
     }
     return 0;
