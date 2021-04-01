@@ -116,6 +116,22 @@ int test8() {
     return check_splits(input, truth_preserve, truth_drop);
 }
 
+int test_empty() {
+    std::string input{"ab cd"};
+    const std::vector<std::string> truth_preserved{{"a"}, {"b"}, {" "}, {"c"}, {"d"}};
+    const std::vector<std::string> truth_drop{{"a"}, {"b"}, {" "}, {"c"}, {"d"}};
+
+    auto preserved = psplit::split_copy(input, "", psplit::Empties::Preserve);
+    auto dropped = psplit::split_copy(input, "", psplit::Empties::Drop);
+
+    std::cout << "  preserving empties\n";
+    if(validate(preserved, truth_preserved) != 0) {
+        return 1;
+    }
+    std::cout << "  dropping empties.\n";
+    return validate(dropped, truth_drop);
+}
+
 int test_lines() {
     std::string input1("\nhello\nworld\n");
     std::string input2("\r\nhello\r\nworld\r\n");
@@ -216,6 +232,11 @@ int main() {
     }
     std::cout << "Test 8\n";
     if(test8() != 0) {
+        return 1;
+    }
+
+    std::cout << "Test empty\n";
+    if(test_empty() != 0) {
         return 1;
     }
 

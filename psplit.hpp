@@ -166,6 +166,12 @@ inline std::vector<std::string_view> split(std::string_view input,
         add_piece(words, input.substr(0, 0), e);
         return words;
     }
+    if(split_chrs.empty()) {
+        for(size_t i = 0; i < input.size(); ++i) {
+            add_piece(words, input.substr(i, 1), e);
+        }
+        return words;
+    }
     const auto input_size = input.size();
     while(current != std::string_view::npos && current != input_size) {
         if(split_chrs.find(input[current]) != std::string_view::npos) {
