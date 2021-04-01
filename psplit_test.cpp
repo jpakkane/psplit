@@ -243,6 +243,24 @@ int test_substr2() {
     return check_substring_splits(input, substr, truth_preserve, truth_drop);
 }
 
+int test_substr3() {
+    std::string input("aa");
+    std::string substr("aaa");
+    const std::vector<std::string> truth_preserve{{"aa"}};
+    const std::vector<std::string> truth_drop{{"aa"}};
+
+    return check_substring_splits(input, substr, truth_preserve, truth_drop);
+}
+
+int test_substr4() {
+    std::string input("aaa");
+    std::string substr("");
+    const std::vector<std::string> truth_preserve{{"a"}, {"a"}, {"a"}};
+    const std::vector<std::string> truth_drop{{"a"}, {"a"}, {"a"}};
+
+    return check_substring_splits(input, substr, truth_preserve, truth_drop);
+}
+
 int main() {
     std::cout << "Test 1\n";
     if(test1() != 0) {
@@ -318,6 +336,16 @@ int main() {
 
     std::cout << "Test substr2\n";
     if(test_substr2() != 0) {
+        return 1;
+    }
+
+    std::cout << "Test substr3\n";
+    if(test_substr3() != 0) {
+        return 1;
+    }
+
+    std::cout << "Test substr4\n";
+    if(test_substr4() != 0) {
         return 1;
     }
     return 0;
