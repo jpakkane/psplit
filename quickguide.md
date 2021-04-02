@@ -117,7 +117,8 @@ std::vector<std::string_view> words = psplit::split(data "-;,");
 ```cpp
 enum class Empties : char {
     Preserve,  // Keep empty words in the output
-    Drop };    // Discard empty words from output
+    Drop       // Discard empty words from output
+};
 ```
 
 The difference between the two is what happens when splitting would
