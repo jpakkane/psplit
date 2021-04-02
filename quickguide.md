@@ -48,7 +48,7 @@ std::vector<std::string_view> words = psplit::split_whitespace(input);
 The behaviour is identical to Python:
 
 ```python
->>> 'one\ntwo  three'.split()
+>>> 'one\ntwo   three'.split()
 ['one', 'two', 'three']
 ```
 
