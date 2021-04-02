@@ -43,11 +43,11 @@ Perhaps the most common case is splitting text by whitespace.
 std::string input("one\ntwo    three");
 std::vector<std::string_view> words = psplit::split_whitespace(input);
 // words contains "one", "two", "three"
-`´´
+```
 
 The behaviour is identical to Python:
 
-`´`python
+```python
 >>> 'one\ntwo  three'.split()
 ['one', 'two', 'three']
 ```
@@ -71,7 +71,7 @@ Python, there is one notable difference. If you do this:
 ```python
 for line in open(filename):
    # use lines here
-``´
+```
 
 then the `line` variable will contain the end-of-line
 character. Psplit's line splitter removes that character. This is done
@@ -97,7 +97,7 @@ Data that is packed with a multi-character separator can be split like this:
 std::string data("oneBREAKtwoBREAKthreeBREAK");
 std::vector<std::string_view> words = split_substr(data, "BREAK");
 // words contains "one", "two", "three"
-`´`
+```
 
 ### Splitting by character classes
 
@@ -134,7 +134,7 @@ auto filtered = psplit::split(data, ",", psplit::Empties::Keep);
 
 ### Functions
 
-`´`cpp
+```cpp
 std::vector<std::string_view> split(std::string_view input,
                                     std::string_view split_chrs,
                                     const Empties e = Empties::Drop) noexcept
@@ -193,7 +193,7 @@ std::vector<std::string> split_substr_copy(std::string_view input,
 Like `split_substr` but returns a copy of the data.
 
 ```cpp
-std::vector<std::string> split_lines_copy(std::string_view data) noexcept;
+std::vector<std::string> split_lines_copy(std::string_view data) noexcept
 ```
 
 Like `split_lines` but returns a copy of the data.
