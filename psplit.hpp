@@ -83,7 +83,7 @@ public:
     }
 
 private:
-    void unmap() {
+    void unmap() noexcept {
         if(mappinghandle) {
             CloseHandle(mappinghandle);
             CloseHandle(filehandle);
@@ -133,7 +133,7 @@ public:
     }
 
 private:
-    void unmap() {
+    void unmap() noexcept {
         if(map) {
             munmap(map, map_size);
             close(fd);

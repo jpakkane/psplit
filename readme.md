@@ -1,7 +1,9 @@
 # Pythonesque string splitting for C++
 
-This library aims to provide functions to split strings in roughly the
-same way as Python's string splitting works.
+This library aims to provide C++ functions to split strings in roughly
+the same way as Python's string splitting works.
+
+For documentation read the [quick quide](quickquide.md).
 
 ## Features
 
