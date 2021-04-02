@@ -3,7 +3,7 @@
 This library aims to provide C++ functions to split strings in roughly
 the same way as Python's string splitting works.
 
-For documentation read the [quick quide](quickquide.md).
+For documentation read the [quick quide](quickguide.md).
 
 ## Features
 
