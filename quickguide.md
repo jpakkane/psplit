@@ -10,8 +10,8 @@ functionality whenever possible.
 ## Installing and using
 
 Psplit is a single header library. Projects that build with the Meson
-build system can easily use it as a (Meson
-subproject)[https://nibblestew.blogspot.com/2021/03/writing-library-and-then-using-it-as.html]. Other
+build system can easily use it as a [Meson
+subproject](https://nibblestew.blogspot.com/2021/03/writing-library-and-then-using-it-as.html). Other
 build systems can use it by, for example, copying the `psplit.hpp`
 inside their own project.
 
